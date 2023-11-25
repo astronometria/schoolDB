@@ -20,9 +20,13 @@
         
         <a href="UserController" class="btn">Show all users</a>
         <br>
-        <a href="etudiantForm.jsp" class="btn">Créer un étudiant</a> 
+        <a href="etudiantCreateForm.jsp" class="btn">Créer un étudiant</a> 
         <br>
         <a href="EtudiantController" class="btn">Lister les étudiants</a>
+        <br>
+        <a href="courCreateForm.jsp" class="btn">Créer un cour</a>
+        <br>
+        <a href="CourController" class="btn">Lister les cours</a>
         </div>
        
     </body>

@@ -2,6 +2,7 @@
 package interfaceDao;
 
 import java.util.List;
+import model.Cour;
 import model.Etudiant;
 
 
@@ -17,5 +18,7 @@ public interface EtudiantDao {
     List<Etudiant> findAll();
 
     Etudiant findById(int id);
+    
+
    
 }

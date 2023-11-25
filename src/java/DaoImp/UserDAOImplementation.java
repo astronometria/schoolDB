@@ -14,7 +14,7 @@ import interfaceDao.UserDao;
 
 public class UserDaoImplementation implements UserDao{
     
-    Connection connection = ConnectionFactory.getConnection();
+    Connection connection = ConnectionFactory.getConnection(true);
 
     // Constructor 
     public UserDaoImplementation() {

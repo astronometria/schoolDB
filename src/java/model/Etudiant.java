@@ -16,6 +16,8 @@ public class Etudiant {
     private String email;
     private String sexe;
     private String dateNaissance;
+    
+    
 
     public Etudiant() {
     }

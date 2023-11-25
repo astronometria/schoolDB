@@ -4,8 +4,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Liste des Cours</title>
         <link rel="stylesheet" type="text/css" href="styles.css" />
-        <title>JSP Page</title>
     </head>
     <body>
         <div class="link-container">
@@ -20,22 +20,28 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Username</th>
-                        <th>Password</th>
+                        <th>Nom du Cour</th>
+                        <th>Description du Cour</th>
+                        <th>Code du Cour</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${listU}" var="user">
+                    <c:forEach items="${listC}" var="cour">
                         <tr>
-                            <td>${user.id}</td>
-                            <td>${user.userName}</td>
-                            <td>${user.password}</td>
+                            <td>${cour.id}</td>
+                            <td>${cour.nomCour}</td>
+                            <td>${cour.descriptionCour}</td>
+                            <td>${cour.codeCour}</td>
+
+                            <td><a href="<c:url value='/CourController?id=${cour.id}&act=delete'/>">delete</a><td>
+                            <td><a href="<c:url value='/CourController?id=${cour.id}&act=update'/>">Mettre a jour</a><td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
-            <c:if test="${listU == null || listU.size() == 0}">
-                <p>No users found.</p>
+            <c:if test="${listC == null || listC.size() == 0}">
+                <p>Aucun cour trouvé.</p>
             </c:if>
         </div>
     </body>

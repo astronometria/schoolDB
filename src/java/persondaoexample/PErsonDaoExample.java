@@ -4,7 +4,7 @@
  */
 package persondaoexample;
 
-import DaoImp.UserDAOImplementation;
+import DaoImp.UserDaoImplementation;
 import java.util.List;
 import model.User;
 import interfaceDao.UserDao;
@@ -15,7 +15,7 @@ public class PErsonDaoExample {
  
     public static void main(String[] args) {
         UserDao dao = 
-                new UserDAOImplementation();
+                new UserDaoImplementation();
     
    // User person1 = dao.findById(20);
     //System.out.println(person1);

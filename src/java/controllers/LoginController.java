@@ -1,9 +1,10 @@
 
 package controllers;
 
-import DaoImp.UserDAOImplementation;
+import DaoImp.UserDaoImplementation;
 import interfaceDao.UserDao;
 import java.io.IOException;
+
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,18 +20,21 @@ public class LoginController extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userName = req.getParameter("username");
         String password = req.getParameter("password");
-        UserDao dao = new UserDAOImplementation();
-        
-        if(password == dao.findByUserName(userName).getPassword()){
-            System.out.println("password == true");
+        UserDao dao = new UserDaoImplementation();
+        System.out.println(dao.findByUserName(userName).getPassword());
+         System.out.println(password);
+        if(password.equalsIgnoreCase(dao.findByUserName(userName).getPassword()) ){
+           
+          
+            req.setAttribute("user", userName);
             getServletContext().
-                getRequestDispatcher("/listUsers.jsp").
+                getRequestDispatcher("/index.jsp").
                 forward(req, resp);
         }
         else{
-            System.out.println("password == false");
+          
             getServletContext().
-                getRequestDispatcher("/index.jsp").
+                getRequestDispatcher("/login.jsp").
                 forward(req, resp);
         }
        

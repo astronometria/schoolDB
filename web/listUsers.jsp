@@ -4,9 +4,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="styles.css" />
         <title>JSP Page</title>
     </head>
     <body>
+        <div class="link-container">
+            <a href="UserController" class="btn">Show all users</a><br>
+            <a href="etudiantForm.jsp" class="btn">Créer un étudiant</a><br>
+            <a href="EtudiantController" class="btn">Lister les étudiants</a>
+        </div>
+        <div class="main-content">
         <table>
             <thead>
                 <tr>
@@ -28,6 +35,6 @@
         <c:if test="${listU == null || listU.size() == 0}">
     <p>No users found.</p>
 </c:if>
-
+        </div>
     </body>
 </html>

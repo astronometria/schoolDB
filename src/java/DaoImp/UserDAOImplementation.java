@@ -12,12 +12,12 @@ import model.User;
 import interfaceDao.UserDao;
 
 
-public class UserDAOImplementation implements UserDao{
+public class UserDaoImplementation implements UserDao{
     
     Connection connection = ConnectionFactory.getConnection();
 
     // Constructor 
-    public UserDAOImplementation() {
+    public UserDaoImplementation() {
 
     }
 
@@ -74,7 +74,7 @@ public class UserDAOImplementation implements UserDao{
 
     // find All people
     public List<User> findAll() {
-
+        System.out.println("in findall()");
         List<User> users = new ArrayList<>();
         User user = null;
         ResultSet resultSet;
@@ -90,6 +90,7 @@ public class UserDAOImplementation implements UserDao{
                 user.setUserName(resultSet.getString("username"));
                 user.setPassword(resultSet.getString("password"));
                 users.add(user);
+                System.out.println(user.toString());
             }
             resultSet.close();
             preparedStatement.close();

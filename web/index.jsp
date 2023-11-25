@@ -1,28 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
- pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
- <div align="center">
-  <h1>Employee Login Form</h1>
-  <form action="LoginController" method="post">
-   <table style="with: 100%">
-    <tr>
-     <td>UserName</td>
-     <td><input type="text" name="username" /></td>
-    </tr>
-    <tr>
-     <td>Password</td>
-     <td><input type="password" name="password" /></td>
-    </tr>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-   </table>
-   <input type="submit" value="Submit" />
-  </form>
- </div>
-</body>
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+    </head>
+    <body>
+        <div class="link-container">
+           
+        </div>
+        <div class="main-content">
+        <h1>Bienvenu ${user}</h1>
+        
+        
+        <a href="UserController" class="btn">Show all users</a>
+        <br>
+        <a href="etudiantForm.jsp" class="btn">Créer un étudiant</a> 
+        <br>
+        <a href="EtudiantController" class="btn">Lister les étudiants</a>
+        </div>
+       
+    </body>
 </html>

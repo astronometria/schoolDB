@@ -4,7 +4,7 @@
  */
 package controllers;
 
-import DaoImp.UserDAOImplementation;
+import DaoImp.UserDaoImplementation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -25,7 +25,7 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        UserDao dao = new UserDAOImplementation();
+        UserDao dao = new UserDaoImplementation();
        
         List<User> listUsers = dao.findAll();
         request.setAttribute("listU", listUsers);
@@ -42,7 +42,7 @@ public class UserController extends HttpServlet {
         
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
-        UserDao dao = new UserDAOImplementation();
+        UserDao dao = new UserDaoImplementation();
 
         User user = new User(userName , password);
 

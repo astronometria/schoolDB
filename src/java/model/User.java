@@ -4,7 +4,7 @@ package model;
 public class User {
     
     private int id;
-    private String userName;
+    private String username;
     private String password;
 
     public User() {
@@ -12,7 +12,7 @@ public class User {
 
     public User(String userName, String password) {
         
-        this.userName = userName;
+        this.username = userName;
         this.password = password;
     }
 
@@ -25,11 +25,11 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getPassword() {
@@ -43,7 +43,7 @@ public class User {
     @Override
     public String toString() {
         
-        return "User{" + "id=" + id + ", userName='" + userName + '\'' +", password='" + password + '\'' + '}';
+        return "User{" + "id=" + id + ", userName='" + username + '\'' +", password='" + password + '\'' + '}';
     }
 
    

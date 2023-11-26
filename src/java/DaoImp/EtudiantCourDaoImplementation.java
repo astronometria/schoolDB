@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Cour;
 import model.Etudiant;
+import model.EtudiantCour;
 
 /**
  *
@@ -71,37 +72,53 @@ public class EtudiantCourDaoImplementation implements EtudiantCourDao{
 
         return etudiants;
     }
-    public List<Cour> getCoursForEtudiant(int etudiantId) {
-        List<Cour> cours = new ArrayList<>();
+   public List<EtudiantCour> getCoursForEtudiant(int etudiantId) {
+    List<EtudiantCour> etudiantCours = new ArrayList<>();
 
-        ResultSet resultSet = null;
-        PreparedStatement preparedStatement;
-        try {
+    ResultSet resultSet = null;
+    PreparedStatement preparedStatement = null;
+    try {
+        String query = "SELECT c.id, c.nomCour, c.descriptionCour, c.codeCour, ec.NoteFinale, ec.Semestre, ec.Annee "
+                     + "FROM cour c "
+                     + "JOIN etudiant_cour ec ON c.id = ec.cour_id "
+                     + "WHERE ec.etudiant_id = ?";
+        preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, etudiantId);
+        resultSet = preparedStatement.executeQuery();
 
-            
+        while (resultSet.next()) {
+            EtudiantCour etudiantCour = new EtudiantCour();
+            etudiantCour.setEtudiantId(etudiantId); // Set the etudiantId for each EtudiantCour
+            etudiantCour.setCourId(resultSet.getInt("id"));
+            etudiantCour.setNomCour(resultSet.getString("nomCour"));
+            etudiantCour.setDescriptionCour(resultSet.getString("descriptionCour"));
+            etudiantCour.setCodeCour(resultSet.getString("codeCour"));
+            etudiantCour.setNoteFinale(resultSet.getDouble("NoteFinale"));
+            etudiantCour.setSemestre(resultSet.getInt("Semestre"));
+            etudiantCour.setAnnee(resultSet.getInt("Annee"));
 
-            String query = "SELECT c.id, c.nomCour, c.descriptionCour, c.codeCour "
-                    + "FROM cour c JOIN etudiant_cour ec ON c.id = ec.cour_id "
-                    + "WHERE ec.etudiant_id = ?";
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, etudiantId);
-            resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                Cour cour = new Cour();
-                cour.setId(resultSet.getInt("id"));
-                cour.setNomCour(resultSet.getString("nomCour"));
-                cour.setDescriptionCour(resultSet.getString("descriptionCour"));
-                cour.setCodeCour(resultSet.getString("codeCour"));
-
-                cours.add(cour);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            etudiantCours.add(etudiantCour);
         }
-
-        return cours;
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        // Close resultSet and preparedStatement
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) { e.printStackTrace(); }
+        }
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) { e.printStackTrace(); }
+        }
     }
+
+    return etudiantCours;
+}
+
+
 
     @Override
     public void removeEtudiantFromCour(int etudiantId, int courId) {

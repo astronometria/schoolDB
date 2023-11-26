@@ -49,33 +49,68 @@
                 </tr>
             </table>
 
-            <h3>Cours Enrolled In</h3>
-            <c:if test="${not empty listCours}">
-                <table>
-                    <thead>
+        <h3>Cours Enrolled In</h3>
+        <c:if test="${not empty etudiantCours}">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Cour</th>
+                        <th>Nom Cour</th>
+                        <th>Description</th>
+                        <th>Code Cour</th>
+                        <th>Note Finale</th>
+                        <th>Semestre</th>
+                        <th>Année</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${etudiantCours}" var="etudiantCour">
                         <tr>
-                            <th>ID Cour</th>
-                            <th>Nom Cour</th>
-                            <th>Description</th>
-                            <th>Code Cour</th>
+                            <td>${etudiantCour.courId}</td>
+                            <td>${etudiantCour.nomCour}</td>
+                            <td>${etudiantCour.descriptionCour}</td>
+                            <td>${etudiantCour.codeCour}</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${etudiantCour.noteFinale != null}">
+                                        ${etudiantCour.noteFinale}
+                                    </c:when>
+                                    <c:otherwise>
+                                        N/A
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${etudiantCour.semestre != null}">
+                                        ${etudiantCour.semestre}
+                                    </c:when>
+                                    <c:otherwise>
+                                        N/A
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${etudiantCour.annee != null}">
+                                        ${etudiantCour.annee}
+                                    </c:when>
+                                    <c:otherwise>
+                                        N/A
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td><a href="<c:url value='/EtudiantCourController?id=${etudiant.id}&courId=${etudiantCour.courId}&act=remove'/>">delete</a></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${listCours}" var="cour">
-                            <tr>
-                                <td>${cour.id}</td>
-                                <td>${cour.nomCour}</td>
-                                <td>${cour.descriptionCour}</td>
-                                <td>${cour.codeCour}</td>
-                                <td><a href="<c:url value='/EtudiantCourController?id=${etudiant.id}&courId=${cour.id}&act=remove'/>">delete</a><td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </c:if>
-            <c:if test="${empty listCours}">
-                <p>No cours found for this etudiant.</p>
-            </c:if>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </c:if>
+        <c:if test="${empty etudiantCours}">
+            <p>No cours found for this etudiant.</p>
+        </c:if>
+
         </div>
     </body>
 </html>

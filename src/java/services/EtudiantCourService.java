@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 import model.Cour;
 import model.Etudiant;
+import model.EtudiantCour;
 
 public class EtudiantCourService {
 
@@ -28,52 +29,52 @@ public class EtudiantCourService {
     }
 
     public void deleteEtudiant(int etudiantId) {
-        Connection conn = null;
-        try {
-            // Get a connection with auto-commit turned off
-            conn = ConnectionFactory.getConnection(false);
+    Connection conn = null;
+    try {
+        // Get a connection with auto-commit turned off
+        conn = ConnectionFactory.getConnection(false);
 
-            // Start transaction
-            // (Note: The transaction started implicitly when we set auto-commit to false)
-            // Check if the etudiant is enrolled in any cours
-            List<Cour> cours = etudiantCourDao.getCoursForEtudiant(etudiantId);
-            if (!cours.isEmpty()) {
-                // Handle the case where etudiant is enrolled in cours,
-                // which might involve removing the etudiant from those cours first
-                for (Cour cour : cours) {
-                    etudiantCourDao.removeEtudiantFromCour(etudiantId, cour.getId());
-                }
+        // Start transaction
+        // Check if the etudiant is enrolled in any cours
+        List<EtudiantCour> cours = etudiantCourDao.getCoursForEtudiant(etudiantId);
+        if (!cours.isEmpty()) {
+            // Handle the case where etudiant is enrolled in cours
+            for (EtudiantCour cour : cours) {
+                etudiantCourDao.removeEtudiantFromCour(etudiantId, cour.getCourId());
             }
-            // Now it's safe to delete the etudiant
-            etudiantDao.delete(etudiantId);
-
-            // Commit transaction
-            conn.commit();
-        } catch (SQLException e) {
-            // Handle exception - log or rethrow as appropriate
-            try {
-                if (conn != null) {
-                    // Rollback transaction if necessary
-                    conn.rollback();
-                }
-            } catch (SQLException ex) {
-                // Handle rollback exception
-            }
-            // Rethrow or handle the original exception as needed
-            throw new RuntimeException("Error deleting etudiant with ID: " + etudiantId, e);
-        } finally {
-            try {
-                // Reset auto-commit to default state before closing the connection
-                if (conn != null && !conn.getAutoCommit()) {
-                    conn.setAutoCommit(true);
-                }
-            } catch (SQLException e) {
-                // Log this exception as well
-            }
-            // Close the connection
-            ConnectionFactory.closeConnection();
         }
+        // Now it's safe to delete the etudiant
+        etudiantDao.delete(etudiantId);
+
+        // Commit transaction
+        conn.commit();
+    } catch (SQLException e) {
+        // Handle exception - log or rethrow as appropriate
+        try {
+            if (conn != null) {
+                // Rollback transaction if necessary
+                conn.rollback();
+            }
+        } catch (SQLException ex) {
+            // Handle rollback exception
+            ex.printStackTrace();
+        }
+        // Rethrow or handle the original exception as needed
+        throw new RuntimeException("Error deleting etudiant with ID: " + etudiantId, e);
+    } finally {
+        try {
+            // Reset auto-commit to default state before closing the connection
+            if (conn != null && !conn.getAutoCommit()) {
+                conn.setAutoCommit(true);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // Close the connection
+        ConnectionFactory.closeConnection();
     }
+}
+
 
     public void deleteCour(int courId) {
         Connection conn = null;
@@ -123,7 +124,7 @@ public class EtudiantCourService {
             ConnectionFactory.closeConnection();
         }
     }
-    public List<Cour> getCoursForEtudiant(int etudiantId) {
+    public List<EtudiantCour> getCoursForEtudiant(int etudiantId) {
         // Call the method from EtudiantCourDaoImplementation
         // You can add additional business logic here if necessary
         return etudiantCourDao.getCoursForEtudiant(etudiantId);

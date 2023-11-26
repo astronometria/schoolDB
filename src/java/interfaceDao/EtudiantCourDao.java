@@ -7,6 +7,7 @@ package interfaceDao;
 import java.util.List;
 import model.Cour;
 import model.Etudiant;
+import model.EtudiantCour;
 
 /**
  *
@@ -16,7 +17,7 @@ public interface EtudiantCourDao {
     public void addEtudiantToCour(int etudiantId, int courId);
     public void removeEtudiantFromCour(int etudiantId, int courId);
     public List<Etudiant> getEtudiantsForCour(int courId);
-    public List<Cour> getCoursForEtudiant(int etudiantId);
+    public List<EtudiantCour> getCoursForEtudiant(int etudiantId);
     
    
 }

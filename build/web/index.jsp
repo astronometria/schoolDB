@@ -2,7 +2,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>Home</title>
@@ -10,26 +9,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="styles.css" />
     </head>
-    <body>
-        <div class="link-container">
-           
+    <body class="index-page">
+        <div class="layout-container">
+            <div class="sidebar">
+                <a href="LoginController" class="nav-link">Acceuil</a>
+                <a href="UserController" class="nav-link">Show all users</a>
+                <a href="etudiantCreateForm.jsp" class="nav-link">Créer un étudiant</a>
+                <a href="EtudiantController" class="nav-link">Lister les étudiants</a>
+                <a href="courCreateForm.jsp" class="nav-link">Créer un cour</a>
+                <a href="CourController" class="nav-link">Lister les cours</a>
+                <a href="LogoutController" class="nav-link logout">Logout</a>
+            </div>
+            <div class="main-content">
+                <h2>Welcome ${user}</h2>
+            </div>
         </div>
-        <div class="main-content">
-        <h1>Bienvenu ${user}</h1>
-        
-        
-        <a href="UserController" class="btn">Show all users</a>
-        <br>
-        <a href="etudiantCreateForm.jsp" class="btn">Créer un étudiant</a> 
-        <br>
-        <a href="EtudiantController" class="btn">Lister les étudiants</a>
-        <br>
-        <a href="courCreateForm.jsp" class="btn">Créer un cour</a>
-        <br>
-        <a href="CourController" class="btn">Lister les cours</a>
-        <br><!-- comment -->
-        <a href="LogoutController">Logout</a>
-        </div>
-       
     </body>
 </html>

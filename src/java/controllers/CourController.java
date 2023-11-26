@@ -70,6 +70,7 @@ public class CourController extends HttpServlet {
 
             }
             if ("showEnrollForm".equals(request.getParameter("act"))) {
+                
                 System.out.println("inside showEnrollForm if statement");
                 int etudiantId = Integer.parseInt(request.getParameter("id"));
                 List<Cour> listCours = dao.findAll();

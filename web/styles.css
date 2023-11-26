@@ -1,50 +1,289 @@
+/* Common Styles */
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
     background-color: #f4f4f4;
+}
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+h1, h2, h3 {
+    text-align: center; /* Center the text */
+    color: #4CAF50; /* Choose a color that fits the theme */
+    margin-top: 30px; /* Add some space at the top */
+    margin-bottom: 30px; /* Add some space at the bottom */
+    padding: 10px; /* Add some padding inside the h2 element */
+    background-color: rgba(0,0,0,0.5); /* A light background color */
+    /*display: inline-block;  By making it inline-block, we can add padding and it centers properly */
+    display: block; /* Ensure the element is block-level */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* A subtle shadow for depth */
+    text-transform: uppercase; /* Optional: UPPERCASE LETTERS */
+    letter-spacing: 1px; /* Optional: Increase spacing between letters */
+    font-weight: bold; /* Optional: Bold font */
+    border: 2px solid #4CAF50; /* Optional: Border to match the text color */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover effects */
+}
+
+/* Optional: Add a hover effect */
+h2:hover {
+    transform: translateY(-5px); /* Lift the element up on hover */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* A stronger shadow when hovered */
+}
+
+/* Global Box Sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Login Page Specific Styles */
+.login-page {
+    background-image: url('images/backgrounds/login.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
 }
 
 .login-container {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 300px;
 }
 
-h1 {
-    color: #333;
-}
-
-table {
-    margin: 0 auto;
-}
-
-td {
-    padding: 10px;
+.login-container:hover {
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 input[type="text"], input[type="password"] {
     padding: 8px;
-    width: 200px;
+    width: 100%;
     border-radius: 4px;
     border: 1px solid #ddd;
+    margin-bottom: 10px;
 }
 
 input[type="submit"] {
-    background-color: #5C6BC0;
+    background-color: #4CAF50;
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    width: 100%;
 }
 
 input[type="submit"]:hover {
-    background-color: #3949AB;
+    background-color: #388E3C;
 }
+
+
+
+/* Layout Container */
+.layout-container {
+    display: flex;
+    min-height: 100vh; /* Full height of the viewport */
+}
+
+/* Sidebar Styles */
+
+.sidebar {
+    width: 200px; /* Adjust as per your design */
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    height: 100vh; /* Full height */
+    overflow-y: auto; /* Enable scroll if content is long */
+}
+
+
+.nav-link {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #4CAF50;
+}
+
+.logout {
+    color: #f44336;
+    margin-top: 20px;
+}
+
+.logout:hover {
+    background-color: #d32f2f;
+    color: white;
+}
+
+/* Main Content Styles */
+.main-content {
+    flex-grow: 1; /* Take the remaining width */
+    padding: 20px;
+    margin-left: 1px; /* Space for the sidebar */
+    overflow-y: auto; /* Enable scroll if content is long */
+    
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    background-image: url('images/backgrounds/login.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    height: 100vh;
+  
+}
+
+/* Table Styles */
+.styled-table {
+    /*width: 100%;*/
+    width: auto; /* Auto-adjust width */
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: white;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+.styled-table tbody tr:nth-of-type(odd) {
+    background-color: #e6e6e6;
+}
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+/* Form Styles */
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: auto; /* Auto-adjust width */
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+}
+
+.form-btn:hover {
+    background-color: #388E3C;
+}
+.list-students-page .main-content h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4CAF50; /* Change as needed */
+}
+/* Action Link Styles */
+.action-link {
+    font-size: 1.2em; /* Larger font size */
+    padding: 5px 10px; /* Some padding around the text */
+    margin: 0 5px; /* Space between action links */
+    text-decoration: none; /* Remove underline */
+    color: #1a73e8; /* Blue color for links */
+}
+
+.action-link:hover {
+    text-decoration: underline; /* Underline on hover for better visibility */
+    color: #0c47a1; /* Darker blue on hover */
+}
+.large-label {
+    font-size: 1.2em; /* Larger font size */
+    color:red;
+    margin-bottom: 5px; /* Space between label and select */
+}
+
+.large-select {
+    font-size: 1.1em; /* Larger font size */
+    padding: 10px; /* More padding for larger touch area */
+    width: 50%; /* Adjust width as needed */
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+.centered-cell {
+    text-align: center; /* Horizontally centers inline or inline-block elements */
+    vertical-align: middle; /* Vertically centers the content */
+    padding: 0; /* Adjust padding as needed */
+}
+
+.button-link {
+    display: inline-block; /* Allows block level properties */
+    padding: 10px 20px; /* Padding inside the button */
+    background-color: #4CAF50; /* Background color */
+    color: white; /* Text color */
+    text-decoration: none; /* Remove underline from link */
+    border-radius: 5px; /* Rounded corners */
+    /* Additional styles for button-like appearance */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Cursor changes to pointer to indicate a link */
+}
+
+.button-link:hover {
+    background-color: #45a049; /* Darker shade on hover */
+}
+
+

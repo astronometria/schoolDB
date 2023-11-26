@@ -5,39 +5,43 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="styles.css" />
-        <title>JSP Page</title>
+        <title>List of Users</title>
     </head>
-    <body>
-        <div class="link-container">
-            <a href="UserController" class="btn">Lister les Users</a><br>
-            <a href="etudiantCreateForm.jsp" class="btn">Créer un étudiant</a><br>
-            <a href="EtudiantController" class="btn">Lister les étudiants</a><br>
-            <a href="courCreateForm.jsp" class="btn">Créer un cour</a><br>
-            <a href="CourController" class="btn">Lister les cours</a>
-            <br><br><a href="LogoutController">Logout</a>
-        </div>
-        <div class="main-content">
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>Password</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${listU}" var="user">
+    <body class="body-class-for-list-users">
+        <div class="layout-container"> <!-- Container for sidebar and main content -->
+            <div class="sidebar">
+                <a href="LoginController" class="nav-link">Acceuil</a>
+                <a href="UserController" class="nav-link">Lister les Users</a>
+                <a href="etudiantCreateForm.jsp" class="nav-link">Créer un étudiant</a>
+                <a href="EtudiantController" class="nav-link">Lister les étudiants</a>
+                <a href="courCreateForm.jsp" class="nav-link">Créer un cour</a>
+                <a href="CourController" class="nav-link">Lister les cours</a>
+                <a href="LogoutController" class="nav-link logout">Logout</a>
+            </div>
+            <div class="main-content">
+                <h2>User List</h2>
+                <table class="styled-table">
+                    <thead>
                         <tr>
-                            <td>${user.id}</td>
-                            <td>${user.userName}</td>
-                            <td>${user.password}</td>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Password</th>
                         </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-            <c:if test="${listU == null || listU.size() == 0}">
-                <p>No users found.</p>
-            </c:if>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${listU}" var="user">
+                            <tr>
+                                <td>${user.id}</td>
+                                <td>${user.userName}</td>
+                                <td>${user.password}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+                <c:if test="${listU == null || listU.size() == 0}">
+                    <p>No users found.</p>
+                </c:if>
+            </div>
         </div>
     </body>
 </html>

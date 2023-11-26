@@ -6,5 +6,5 @@ CREATE TABLE `user` (
   UNIQUE (`username`)
 );
 
-
+INSERT INTO `user` (username, password) VALUES ('admin', 'admin');
 

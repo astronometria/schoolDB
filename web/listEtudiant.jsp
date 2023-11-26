@@ -8,63 +8,48 @@
         <link rel="stylesheet" type="text/css" href="styles.css" />
     </head>
     <body>
-        <div class="link-container">
-            <a href="UserController" class="btn">Lister les Users</a><br>
-            <a href="etudiantCreateForm.jsp" class="btn">Créer un étudiant</a><br>
-            <a href="EtudiantController" class="btn">Lister les étudiants</a><br>
-            <a href="courCreateForm.jsp" class="btn">Créer un cour</a><br>
-            <a href="CourController" class="btn">Lister les cours</a>
-            <br><br><a href="LogoutController">Logout</a>
-        </div>
-        <div class="main-content">
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Université</th>
-                        <th>Adresse</th>
-                        <th>Ville</th>
-                        <th>Province</th>
-                        <th>Code Postal</th>
-                        <th>Pays</th>
-                        <th>Téléphone</th>
-                        <th>Email</th>
-                        <th>Sexe</th>
-                        <th>Date de Naissance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${listE}" var="etudiant">
+        <div class="layout-container">
+            <nav class="sidebar">
+                <a href="LoginController" class="nav-link">Acceuil</a>
+                <a href="UserController" class="nav-link">Lister les Users</a>
+                <a href="etudiantCreateForm.jsp" class="nav-link">Créer un étudiant</a>
+                <a href="EtudiantController" class="nav-link">Lister les étudiants</a>
+                <a href="courCreateForm.jsp" class="nav-link">Créer un cour</a>
+                <a href="CourController" class="nav-link">Lister les cours</a>
+                <a href="LogoutController" class="nav-link logout">Logout</a>
+            </nav>
+            <div class="main-content">
+                <h2>Liste des Étudiants</h2>
+                <table class="styled-table">
+                    <thead>
                         <tr>
-                            <td>${etudiant.id}</td>
-                            <td>${etudiant.nom}</td>
-                            <td>${etudiant.prenom}</td>
-                            <td>${etudiant.universite}</td>
-                            <td>${etudiant.adresse}</td>
-                            <td>${etudiant.ville}</td>
-                            <td>${etudiant.province}</td>
-                            <td>${etudiant.codePostal}</td>
-                            <td>${etudiant.pays}</td>
-                            <td>${etudiant.telephone}</td>
-                            <td>${etudiant.email}</td>
-                            <td>${etudiant.sexe}</td>
-                            <td>${etudiant.dateNaissance}</td>
-                            <td><a href="<c:url value='/EtudiantController?id=${etudiant.id}&act=delete'/>">delete</a>
-                            <td><a href="<c:url value='/EtudiantController?id=${etudiant.id}&act=update'/>">Mettre a jour</a>
-                            <td><a href="<c:url value='/CourController?act=showEnrollForm&id=${etudiant.id}'/>">Enroll in Course</a>
-                            <td><a href="<c:url value='/EtudiantCourController?act=listCoursForEtudiant&id=${etudiant.id}'/>">Show Details</a>
-                            <td><a href="<c:url value='/EtudiantCourController?act=showBulletin&id=${etudiant.id}'/>">Show Bulletin</a>
-                                
-
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Actions</th>
                         </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-            <c:if test="${listE == null || listE.size() == 0}">
-                <p>Aucun étudiant trouvé.</p>
-            </c:if>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${listE}" var="etudiant">
+                            <tr>
+                                <td>${etudiant.id}</td>
+                                <td>${etudiant.nom}</td>
+                                <td>${etudiant.prenom}</td>
+                                <td>
+                                    <a href="<c:url value='/EtudiantController?id=${etudiant.id}&act=delete'/>" class="button-link">delete</a> |
+                                    <a href="<c:url value='/EtudiantController?id=${etudiant.id}&act=update'/>" class="button-link">update</a> |
+                                    <a href="<c:url value='/CourController?act=showEnrollForm&id=${etudiant.id}'/>" class="button-link">enroll</a> |
+                                    <a href="<c:url value='/EtudiantCourController?act=listCoursForEtudiant&id=${etudiant.id}'/>" class="button-link">details</a> |
+                                    <a href="<c:url value='/EtudiantCourController?act=showBulletin&id=${etudiant.id}'/>" class="button-link">bulletin</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+                <c:if test="${listE == null || listE.size() == 0}">
+                    <p>Aucun étudiant trouvé.</p>
+                </c:if>
+            </div>
         </div>
     </body>
 </html>

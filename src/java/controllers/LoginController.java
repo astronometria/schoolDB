@@ -17,6 +17,15 @@ import model.User;
 public class LoginController extends HttpServlet{
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String userName = req.getParameter("username");
+              req.setAttribute("user", userName);
+            getServletContext().
+                getRequestDispatcher("/index.jsp").
+                forward(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userName = req.getParameter("username");
         String password = req.getParameter("password");

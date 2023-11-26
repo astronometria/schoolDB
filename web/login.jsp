@@ -3,11 +3,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Employee Login Form</title>
-<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
-<body>
+<body class="login-page">
     <div class="login-container">
-        <h1>Employee Login Form</h1>
+        <h2>Employee Login Form</h2>
         <form action="LoginController" method="post">
             <table>
                 <tr>

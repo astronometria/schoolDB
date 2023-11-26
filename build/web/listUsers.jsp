@@ -16,7 +16,7 @@
             <a href="CourController" class="btn">Lister les cours</a>
         </div>
         <div class="main-content">
-            <table>
+            <table border="1">
                 <thead>
                     <tr>
                         <th>ID</th>

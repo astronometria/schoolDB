@@ -16,7 +16,7 @@
             <a href="CourController" class="btn">Lister les cours</a>
         </div>
         <div class="main-content">
-            <table>
+            <table border="1">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -50,10 +50,12 @@
                             <td>${etudiant.email}</td>
                             <td>${etudiant.sexe}</td>
                             <td>${etudiant.dateNaissance}</td>
-                            <td><a href="<c:url value='/EtudiantController?id=${etudiant.id}&act=delete'/>">delete</a><td>
+                            <td><a href="<c:url value='/EtudiantController?id=${etudiant.id}&act=delete'/>">delete</a>
                             <td><a href="<c:url value='/EtudiantController?id=${etudiant.id}&act=update'/>">Mettre a jour</a>
                             <td><a href="<c:url value='/CourController?act=showEnrollForm&id=${etudiant.id}'/>">Enroll in Course</a>
                             <td><a href="<c:url value='/EtudiantCourController?act=listCoursForEtudiant&id=${etudiant.id}'/>">Show Details</a>
+                            <td><a href="<c:url value='/EtudiantCourController?act=showBulletin&id=${etudiant.id}'/>">Show Bulletin</a>
+                                
 
                         </tr>
                     </c:forEach>

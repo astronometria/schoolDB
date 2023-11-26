@@ -18,6 +18,7 @@ public interface EtudiantCourDao {
     public void removeEtudiantFromCour(int etudiantId, int courId);
     public List<Etudiant> getEtudiantsForCour(int courId);
     public List<EtudiantCour> getCoursForEtudiant(int etudiantId);
+    public void addOrUpdateEtudiantCourDetails(int etudiantId, int courId, String codeCour, Double noteFinale, int semestre, int annee);
     
    
 }

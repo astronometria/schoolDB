@@ -141,4 +141,8 @@ public class EtudiantCourService {
     public void removeEtudiantFromCour(int etudiantId, int courId){
         etudiantCourDao.removeEtudiantFromCour(etudiantId, courId);
     }
+    public void addOrUpdateEtudiantCourDetails(int etudiantId, int courId, String codeCour, Double noteFinale, int semestre, int annee){
+        etudiantCourDao.addOrUpdateEtudiantCourDetails(etudiantId, courId, codeCour, noteFinale, semestre, annee);
+    }
 }
+

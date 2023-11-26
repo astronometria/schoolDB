@@ -9,6 +9,7 @@ import interfaceDao.EtudiantDao;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import model.Etudiant;
@@ -40,18 +41,9 @@ public class EtudiantCourController extends HttpServlet {
         if (action != null) {
             try {
                 switch (action) {
-                    case "listEtudiantsForCour":
-                        // Existing code remains unchanged
-                        int courId = Integer.parseInt(request.getParameter("courId"));
-                        List<Etudiant> etudiants = etudiantCourService.getEtudiantsForCour(courId);
-                        request.setAttribute("etudiants", etudiants);
-                        request.setAttribute("courId", courId);
-                        request.getRequestDispatcher("/etudiantsForCour.jsp").forward(request, response);
-                        break;
 
                     case "listCoursForEtudiant":
                         int etudiantId = Integer.parseInt(request.getParameter("id"));
-                        
 
                         Etudiant etudiant = daoEtudiant.findById(etudiantId);
                         List<EtudiantCour> etudiantCours = daoEtudiantCour.getCoursForEtudiant(etudiantId);
@@ -71,6 +63,29 @@ public class EtudiantCourController extends HttpServlet {
                         request.setAttribute("etudiant", etudiant);
                         request.setAttribute("etudiantCours", etudiantCours);
                         request.getRequestDispatcher("/coursForEtudiant.jsp").forward(request, response);
+                        break;
+
+                    case "modify":
+
+                        int etudiantIdForModify = Integer.parseInt(request.getParameter("id"));
+                        int courIdFormodify = Integer.parseInt(request.getParameter("courId"));
+
+                        etudiant = daoEtudiant.findById(etudiantIdForModify);
+                        etudiantCours = daoEtudiantCour.getCoursForEtudiant(etudiantIdForModify);
+                        request.setAttribute("etudiant", etudiant);
+                        request.setAttribute("etudiantCours", etudiantCours);
+                        request.getRequestDispatcher("/noteCreateForm.jsp").forward(request, response);
+                        break;
+                        
+                    case "showBulletin":
+
+                        int etudiantIdForBulletin = Integer.parseInt(request.getParameter("id"));
+ 
+                        etudiantCours = daoEtudiantCour.getCoursForEtudiant(etudiantIdForBulletin);
+                        request.setAttribute("etudiantCours", etudiantCours);
+                        request.setAttribute("etudiantId", etudiantIdForBulletin);
+
+                        request.getRequestDispatcher("/displayBulletin.jsp").forward(request, response);
                         break;
 
                     // Add other cases as needed
@@ -113,7 +128,7 @@ public class EtudiantCourController extends HttpServlet {
 
                         // Set attributes for forwarding to the JSP
                         request.setAttribute("etudiant", etudiant);
-                        request.setAttribute("etudiantCours", etudiantCours); // Updated to use EtudiantCour list
+                        request.setAttribute("etudiantCours", etudiantCours); 
 
                         // Forward to the JSP/view that shows Cours for an Etudiant
                         request.getRequestDispatcher("/coursForEtudiant.jsp").forward(request, response);
@@ -121,17 +136,40 @@ public class EtudiantCourController extends HttpServlet {
 
                     // Add other cases as needed
                 }
+                if ("addDetails".equals(action)) {
+                    System.out.println("inside the addDetails ");
+                    int etudiantId = Integer.parseInt(request.getParameter("etudiantId"));
+                    int courId = Integer.parseInt(request.getParameter("courId"));
+                    String codeCour = request.getParameter("codeCour");
+                    double noteFinale = Double.parseDouble(request.getParameter("noteFinale"));
+                    int semestre = Integer.parseInt(request.getParameter("semestre"));
+                    int annee = Integer.parseInt(request.getParameter("annee"));
+
+                    // Call the method on EtudiantCourService to add or update the details
+                    etudiantCourService.addOrUpdateEtudiantCourDetails(etudiantId, courId, codeCour, noteFinale, semestre, annee);
+
+                    List<EtudiantCour> bulletin = daoEtudiantCour.getCoursForEtudiant(etudiantId);
+                    request.setAttribute("bulletin", bulletin);
+                    request.getRequestDispatcher("/displayBulletin.jsp").forward(request, response);
+
+                }
+                
+
             } catch (NumberFormatException e) {
                 // Handle exception for parsing integer parameters
                 response.sendRedirect("errorPage.jsp?error=Invalid%20ID%20format");
             } catch (Exception e) {
-                // Handle other exceptions
-                response.sendRedirect("errorPage.jsp?error=Unexpected%20error");
+                e.printStackTrace(); // Log the stack trace
+                response.sendRedirect("errorPage.jsp?error=Unexpected%20error:" + URLEncoder.encode(e.getMessage(), "UTF-8"));
             }
-        } else {
+        
+    }
+
+    
+        else {
             // If no action is specified, redirect to a default page
             response.sendRedirect("defaultPage.jsp");
-        }
     }
+}
 
 }

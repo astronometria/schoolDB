@@ -135,6 +135,80 @@ public class EtudiantCourDaoImplementation implements EtudiantCourDao{
             throw new RuntimeException("Error removing Etudiant from Cour", ex);
         }
     }
+    public void addOrUpdateEtudiantCourDetails(int etudiantId, int courId, String codeCour, Double noteFinale, int semestre, int annee) {
+    
+    PreparedStatement preparedStatement = null;
+    try {
+        // Get a connection with auto-commit turned off
+        connection = ConnectionFactory.getConnection(false);
+       
+
+        // Check if an EtudiantCour detail already exists
+        String checkQuery = "SELECT count(*) FROM etudiant_cour WHERE etudiant_id = ? AND cour_id = ?";
+        preparedStatement = connection.prepareStatement(checkQuery);
+        preparedStatement.setInt(1, etudiantId);
+        preparedStatement.setInt(2, courId);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        int count = 0;
+        if (resultSet.next()) {
+            count = resultSet.getInt(1);
+        }
+        resultSet.close();
+        preparedStatement.close();
+
+        // If the detail exists, update it; otherwise, insert a new record
+        if (count > 0) {
+            // Update existing detail
+            String updateQuery = "UPDATE etudiant_cour SET code_Cour = ?, NoteFinale = ?, Semestre = ?, Annee = ? WHERE etudiant_id = ? AND cour_id = ?";
+            preparedStatement = connection.prepareStatement(updateQuery);
+            preparedStatement.setString(1, codeCour);
+            preparedStatement.setDouble(2, noteFinale);
+            preparedStatement.setInt(3, semestre);
+            preparedStatement.setInt(4, annee);
+            preparedStatement.setInt(5, etudiantId);
+            preparedStatement.setInt(6, courId);
+        } else {
+            // Insert new detail
+            String insertQuery = "INSERT INTO etudiant_cour (etudiant_id, cour_id, code_cour, NoteFinale, Semestre, Annee) VALUES (?, ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(insertQuery);
+            preparedStatement.setInt(1, etudiantId);
+            preparedStatement.setInt(2, courId);
+            preparedStatement.setString(3, codeCour);
+            preparedStatement.setDouble(4, noteFinale);
+            preparedStatement.setInt(5, semestre);
+            preparedStatement.setInt(6, annee);
+        }
+
+        preparedStatement.executeUpdate();
+
+        // Commit the transaction
+        connection.commit();
+    } catch (SQLException e) {
+        // Handle exception - log or rethrow as appropriate
+        try {
+            if (connection != null) {
+                // Rollback transaction if necessary
+                connection.rollback();
+            }
+        } catch (SQLException ex) {
+            // Handle rollback exception
+            ex.printStackTrace();
+        }
+        throw new RuntimeException("Error adding or updating EtudiantCour details", e);
+    } finally {
+        try {
+            if (preparedStatement != null) preparedStatement.close();
+            if (connection != null) {
+                connection.setAutoCommit(true); // Reset auto-commit to default state
+                connection.close(); // Close the connection
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
 
    
 }

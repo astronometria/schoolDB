@@ -16,7 +16,7 @@
         </div>
         <div class="main-content">
             <h2>Information for Etudiant</h2>
-            <table>
+            <table border='1'>
                 <tr>
                     <th>ID</th>
                     <th>Nom</th>
@@ -51,7 +51,7 @@
 
         <h3>Cours Enrolled In</h3>
         <c:if test="${not empty etudiantCours}">
-            <table>
+            <table border = 1>
                 <thead>
                     <tr>
                         <th>ID Cour</th>
@@ -102,6 +102,9 @@
                                 </c:choose>
                             </td>
                             <td><a href="<c:url value='/EtudiantCourController?id=${etudiant.id}&courId=${etudiantCour.courId}&act=remove'/>">delete</a></td>
+                            <td><a href="<c:url value='/EtudiantCourController?id=${etudiant.id}&courId=${etudiantCour.courId}&act=modify'/>">modify</a></td>
+                            <td><a href="<c:url value='/EtudiantCourController?act=showBulletin&id=${etudiant.id}'/>">Show Bulletin</a>
+                            <td><a href="<c:url value='/CourController?act=showEnrollForm&id=${etudiant.id}'/>">Enroll in Course</a>
                         </tr>
                     </c:forEach>
                 </tbody>

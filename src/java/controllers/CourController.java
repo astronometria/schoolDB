@@ -22,12 +22,31 @@ import model.Etudiant;
 import services.EtudiantCourService;
 
 /**
+ * The {@code CourController} class extends {@link HttpServlet} and is responsible
+ * for handling all the requests related to the 'Cour' entity, such as creating,
+ * updating, deleting, and displaying courses. It interacts with the {@link CourDao}
+ * to persist and retrieve course data.
+ *
+ * <p>It supports the GET, POST, PUT, and DELETE HTTP methods to facilitate the
+ * CRUD operations on course data. The servlet is annotated with {@code WebServlet},
+ * mapping it to the URL pattern '/CourController'.</p>
+ * 
+ * <p>Each method in this class is designed to handle a specific HTTP request method,
+ * gather the necessary data from the request, perform operations using the DAO layer,
+ * and forward the response to the appropriate JSP page.</p>
  *
  * @author Desktop
  */
 @WebServlet(name = "CourController", urlPatterns = {"/CourController"})
 public class CourController extends HttpServlet {
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -45,6 +64,18 @@ public class CourController extends HttpServlet {
         }
     }
 
+   /**
+     * Handles the HTTP {@code GET} method.
+     * <p>This method determines the action to be taken (such as deleting a course,
+     * updating course information, showing the enrollment form, or displaying the
+     * list of courses) based on the 'act' parameter from the request. It then forwards
+     * the request to the appropriate JSP page with the necessary attributes set.</p>
+     *
+     * @param request  servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -90,6 +121,17 @@ public class CourController extends HttpServlet {
         getServletContext().getRequestDispatcher("/listCour.jsp").forward(request, response);
     }
 
+    /**
+     * Handles the HTTP {@code POST} method.
+     * <p>This method is responsible for creating a new course record based on the form
+     * data received in the request. After creating the course, it retrieves an updated
+     * list of courses and forwards to the course listing JSP page.</p>
+     *
+     * @param request  servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -125,6 +167,17 @@ public class CourController extends HttpServlet {
         getServletContext().getRequestDispatcher("/listCour.jsp").forward(request, response);
     }
 
+     /**
+     * Handles the HTTP {@code DELETE} method.
+     * <p>This method is called to delete a course. It uses the {@link EtudiantCourService}
+     * to handle the deletion operation and then forwards to the course listing JSP
+     * page with an updated list of courses.</p>
+     *
+     * @param req  servlet request
+     * @param resp servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("in the cour doDelete");
@@ -149,6 +202,17 @@ public class CourController extends HttpServlet {
         getServletContext().getRequestDispatcher("/listCour.jsp").forward(req, resp);
     }
 
+    /**
+     * Handles the HTTP {@code PUT} method.
+     * <p>This method updates an existing course's information based on the form data
+     * received in the request. It then retrieves an updated list of courses and forwards
+     * to the course listing JSP page.</p>
+     *
+     * @param request  servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("in the cour doPut");
@@ -178,6 +242,10 @@ public class CourController extends HttpServlet {
         getServletContext().getRequestDispatcher("/listCour.jsp").forward(request, response);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

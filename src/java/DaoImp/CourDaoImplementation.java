@@ -16,13 +16,24 @@ import model.Cour;
 import model.Etudiant;
 
 /**
- *
+ * Implementation of the {@link CourDao} interface for managing 'Cour' entities in the database.
+ * This class provides CRUD operations for 'Cour' objects such as creating, updating, deleting, 
+ * and finding courses either all or by their ID.
+ * 
+ * <p>Each method in this class corresponds to a specific operation on the 'Cour' table in the database,
+ * utilizing prepared statements to interact with the database.</p>
+ * 
  * @author Desktop
  */
 public class CourDaoImplementation implements CourDao {
 
     Connection connection = ConnectionFactory.getConnection(true);
-
+    
+     /**
+     * Creates a new course record in the database.
+     * 
+     * @param c The {@link Cour} object containing the course information to be inserted.
+     */
     @Override
     public void create(Cour c) {
         PreparedStatement preparedStatement;
@@ -42,6 +53,11 @@ public class CourDaoImplementation implements CourDao {
         }
     }
 
+    /**
+     * Updates an existing course record in the database.
+     * 
+     * @param c The {@link Cour} object containing the updated course information.
+     */
     @Override
     public void update(Cour c) {
         System.out.println("inside ourImplement.update");
@@ -65,6 +81,11 @@ public class CourDaoImplementation implements CourDao {
         }
     }
 
+    /**
+     * Deletes a course record from the database by its ID.
+     * 
+     * @param id The ID of the course to be deleted.
+     */
     @Override
     public void delete(int id) {
         PreparedStatement preparedStatement;
@@ -79,7 +100,13 @@ public class CourDaoImplementation implements CourDao {
             ex.printStackTrace();
         }
     }
+    
 
+    /**
+     * Retrieves all course records from the database.
+     * 
+     * @return A list of {@link Cour} objects representing all courses in the database.
+     */
     @Override
     public List<Cour> findAll() {
         List<Cour> cours = new ArrayList<>();
@@ -110,6 +137,12 @@ public class CourDaoImplementation implements CourDao {
         return cours;
     }
 
+    /**
+     * Retrieves a course record by its ID.
+     * 
+     * @param id The ID of the course to be retrieved.
+     * @return The {@link Cour} object if found, or {@code null} if not found.
+     */
     @Override
     public Cour findById(int id) {
         Cour cour = null;

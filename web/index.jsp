@@ -27,6 +27,8 @@
         <a href="courCreateForm.jsp" class="btn">Créer un cour</a>
         <br>
         <a href="CourController" class="btn">Lister les cours</a>
+        <br><!-- comment -->
+        <a href="LogoutController">Logout</a>
         </div>
        
     </body>

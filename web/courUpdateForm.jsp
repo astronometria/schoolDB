@@ -21,7 +21,7 @@
                 <h2>Cour Update Form</h2>
                 <form action="CourController" method="post" class="form-container"> 
                     <input type="hidden" name="id" value="${c.id}" /> <!-- Hidden field for id -->
-                    <input type="hidden" name="act" value="update" /> <!-- Correct the action value to 'update' -->
+                    <input type="hidden" name="act" value="put" /> 
 
                     <label for="nomCour">Nom du cour:</label>
                     <input type="text" id="nomCour" name="nomCour" value="${c.nomCour}"><br><br>
@@ -32,7 +32,7 @@
                     <label for="codeCour">Code du cour:</label>
                     <input type="text" id="codeCour" name="codeCour" value="${c.codeCour}"><br><br>
 
-                    <input type="submit" value="Update"> <!-- Change the button text to 'Update' -->
+                    <input type="submit" value="Update"> 
                 </form>
             </div>
         </div>

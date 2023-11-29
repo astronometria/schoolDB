@@ -137,14 +137,18 @@ public class CourController extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("in the cour doPost");
         String act = request.getParameter("act");
+        CourDao dao = new CourDaoImplementation();
+        
         if (act != null) {
             if (act.equals("put")) {
                 System.out.println("in the  cour doPost.put");
                 doPut(request, response);
                 return;
             }
+           
+            
         }
-        CourDao dao = new CourDaoImplementation();
+        
 
         // Retrieve form data
         String nomCour = request.getParameter("nomCour");

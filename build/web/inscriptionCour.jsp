@@ -18,6 +18,7 @@
                 <a href="CourController" class="btn">Lister les cours</a>
                 <br><br><a href="LogoutController">Logout</a>
             </nav>
+       
             <div class="main-content">
                 <h2>Enroll Etudiant in a Cour</h2>
                 <form action="EtudiantCourController" method="post" class="form-container">
@@ -32,5 +33,6 @@
                     <input type="submit" value="enroll">
                 </form>
             </div>
+        </div>
     </body>
 </html>
